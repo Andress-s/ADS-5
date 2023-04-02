@@ -37,9 +37,7 @@ std::string infx2pstfx(std::string infix)
                 stk.pop();
             }
             stk.push(infix[i]);
-        }
-        else if (infix[i] == '(')
-            stk.push(infix[i]);
+        } else if (infix[i] == '(') stk.push(infix[i]);
         else if (infix[i] == ')')
         {
             while (!stk.empty() && stk.top() != '(')
@@ -49,8 +47,7 @@ std::string infx2pstfx(std::string infix)
                 stk.pop();
             }
             stk.pop();
-        }
-        else
+        } else
             postfix += infix[i];
     }
 
@@ -93,9 +90,7 @@ int eval(std::string postfix)
                     stk.pop();
                 }
                 std::reverse(operand_2.begin(), operand_2.end());
-            }
-            else
-            {
+            } else {
                 while (!stk.empty() && stk.top() != pust)
                 {
                     operand_2 += stk.top();
@@ -105,7 +100,6 @@ int eval(std::string postfix)
             if (stk.top() == " ")
             {
                 stk.pop();
-
                 if (stk.top() == "0")
                 {
                     while (!stk.empty() && stk.top() != pust)
@@ -114,30 +108,22 @@ int eval(std::string postfix)
                         stk.pop();
                     }
                     std::reverse(operand_1.begin(), operand_1.end());
-                }
-                else
-                {
+                } else {
                     while (!stk.empty() && stk.top() != pust)
                     {
                         operand_1 += stk.top();
                         stk.pop();
                     }
                 }
-
             }
-
             std::string result = evaluate(postfix[i], std::stoi(operand_1), std::stoi(operand_2));
             stk.push(result);
-        }
-        else
-            if (postfix[i] == ' ')
+        } else if (postfix[i] == ' ')
                 stk.push(" ");
-            else
+          else
                 stk.push(std::to_string(postfix[i] - '0'));
-
         operand_1 = " ";
         operand_2 = " ";
     }
-
     return std::stoi(stk.top());
 }
