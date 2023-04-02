@@ -31,26 +31,23 @@ std::string infx2pstfx(std::string infix) {
                 stk.pop();
             }
             stk.push(infix[i]);
-        } else if (infix[i] == '(') stk.push(infix[i]);
-        else if (infix[i] == ')') {
+        } else if (infix[i] == '(') {
+            stk.push(infix[i]);
+        } else if (infix[i] == ')') {
             while (!stk.empty() && stk.top() != '(') {
                 //postfix.push_back(' ');
                 postfix += stk.top();
                 stk.pop();
             }
             stk.pop();
-        } else
-            postfix += infix[i];
+        } else postfix += infix[i];
     }
-
     while (!stk.empty()) {
         postfix += stk.top();
         stk.pop();
     }
     return postfix;
 }
-
-
 
 std::string evaluate(char op, int operand1, int operand2) {
     switch (op) {
@@ -59,6 +56,7 @@ std::string evaluate(char op, int operand1, int operand2) {
     case '*': return std::to_string(operand1 * operand2);
     case '/': return std::to_string(operand1 / operand2);
     }
+    return 0;
 }
 
 int eval(std::string postfix) {
