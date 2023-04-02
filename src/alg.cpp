@@ -30,19 +30,16 @@ std::string infx2pstfx(std::string infix) {
                 stk.pop();
             }
             stk.push(infix[i]);
-        }
-        else if (infix[i] == '(') {
+        } else if (infix[i] == '(') {
             stk.push(infix[i]);
-        }
-        else if (infix[i] == ')') {
+        } else if (infix[i] == ')') {
             while (!stk.empty() && stk.top() != '(') {
                 //postfix.push_back(' ');
                 postfix += stk.top();
                 stk.pop();
             }
             stk.pop();
-        }
-        else postfix += infix[i];
+        } else postfix += infix[i];
     }
     while (!stk.empty()) {
         postfix += stk.top();
@@ -74,8 +71,7 @@ int eval(std::string postfix) {
                     stk.pop();
                 }
                 std::reverse(op2.begin(), op2.end());
-            }
-            else {
+            } else {
                 while (!stk.empty() && stk.top() != pust) {
                     op2 += stk.top();
                     stk.pop();
@@ -89,8 +85,7 @@ int eval(std::string postfix) {
                         stk.pop();
                     }
                     std::reverse(op1.begin(), op1.end());
-                }
-                else {
+                } else {
                     while (!stk.empty() && stk.top() != pust) {
                         op1 += stk.top();
                         stk.pop();
@@ -99,12 +94,12 @@ int eval(std::string postfix) {
             }
             std::string r = ev(postfix[i], std::stoi(op1), std::stoi(op2));
             stk.push(r);
-        }
-        else if (postfix[i] == ' ') {
-            stk.push(" ");
-        }
-        else {
-            stk.push(std::to_string(postfix[i] - '0'));
+        } else {
+            if (postfix[i] == ' ') {
+                stk.push(" ");
+            } else {
+                stk.push(std::to_string(postfix[i] - '0'));
+            }
         }
         op1 = " ";
         op2 = " ";
