@@ -4,15 +4,13 @@
 #include <algorithm>
 #include <iostream>
 
-bool isOperator(char ch)
-{
+bool isOperator(char ch) {
     if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
         return true;
     return false;
 }
 
-int precedence(char ch)
-{
+int precedence(char ch) {
     if (ch == '*' || ch == '/')
         return 2;
     if (ch == '+' || ch == '-')
@@ -21,27 +19,21 @@ int precedence(char ch)
 }
 
 
-std::string infx2pstfx(std::string infix)
-{
+std::string infx2pstfx(std::string infix) {
     std::stack<char> stk;
     std::string postfix;
 
-    for (int i = 0; i < infix.size(); i++)
-    {
-        if (isOperator(infix[i]))
-        {
+    for (int i = 0; i < infix.size(); i++) {
+        if (isOperator(infix[i])) {
             postfix.push_back(' ');
-            while (!stk.empty() && precedence(stk.top()) >= precedence(infix[i]))
-            {
+            while (!stk.empty() && precedence(stk.top()) >= precedence(infix[i])) {
                 postfix += stk.top();
                 stk.pop();
             }
             stk.push(infix[i]);
         } else if (infix[i] == '(') stk.push(infix[i]);
-        else if (infix[i] == ')')
-        {
-            while (!stk.empty() && stk.top() != '(')
-            {
+        else if (infix[i] == ')') {
+            while (!stk.empty() && stk.top() != '(') {
                 //postfix.push_back(' ');
                 postfix += stk.top();
                 stk.pop();
@@ -51,8 +43,7 @@ std::string infx2pstfx(std::string infix)
             postfix += infix[i];
     }
 
-    while (!stk.empty())
-    {
+    while (!stk.empty()) {
         postfix += stk.top();
         stk.pop();
     }
@@ -61,10 +52,8 @@ std::string infx2pstfx(std::string infix)
 
 
 
-std::string evaluate(char op, int operand1, int operand2)
-{
-    switch (op)
-    {
+std::string evaluate(char op, int operand1, int operand2) {
+    switch (op) {
     case '+': return std::to_string(operand1 + operand2);
     case '-': return std::to_string(operand1 - operand2);
     case '*': return std::to_string(operand1 * operand2);
@@ -72,56 +61,44 @@ std::string evaluate(char op, int operand1, int operand2)
     }
 }
 
-int eval(std::string postfix)
-{
+int eval(std::string postfix) {
     std::stack<std::string> stk;
     std::string pust = " ";
     std::string operand_2;
     std::string operand_1;
-    for (int i = 0; i < postfix.size(); i++)
-    {
-        if (isOperator(postfix[i]))
-        {
-            if (stk.top() == "0")
-            {
-                while (!stk.empty() && stk.top() != pust)
-                {
+    for (int i = 0; i < postfix.size(); i++) {
+        if (isOperator(postfix[i])) {
+            if (stk.top() == "0") {
+                while (!stk.empty() && stk.top() != pust) {
                     operand_2 += stk.top();
                     stk.pop();
                 }
                 std::reverse(operand_2.begin(), operand_2.end());
             } else {
-                while (!stk.empty() && stk.top() != pust)
-                {
+                while (!stk.empty() && stk.top() != pust) {
                     operand_2 += stk.top();
                     stk.pop();
                 }
             }
-            if (stk.top() == " ")
-            {
+            if (stk.top() == " ") {
                 stk.pop();
-                if (stk.top() == "0")
-                {
-                    while (!stk.empty() && stk.top() != pust)
-                    {
+                if (stk.top() == "0") {
+                    while (!stk.empty() && stk.top() != pust) {
                         operand_1 += stk.top();
                         stk.pop();
                     }
                     std::reverse(operand_1.begin(), operand_1.end());
                 } else {
-                    while (!stk.empty() && stk.top() != pust)
-                    {
+                    while (!stk.empty() && stk.top() != pust) {
                         operand_1 += stk.top();
                         stk.pop();
                     }
                 }
             }
-            std::string result = evaluate(postfix[i], std::stoi(operand_1), std::stoi(operand_2));
-            stk.push(result);
-        } else if (postfix[i] == ' ')
-                stk.push(" ");
-          else
-                stk.push(std::to_string(postfix[i] - '0'));
+          std::string result = evaluate(postfix[i], std::stoi(operand_1), std::stoi(operand_2));
+          stk.push(result);
+        } else if (postfix[i] == ' ') stk.push(" ");
+          else stk.push(std::to_string(postfix[i] - '0'));
         operand_1 = " ";
         operand_2 = " ";
     }
