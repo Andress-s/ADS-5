@@ -101,7 +101,7 @@ int eval(std::string pref) {
             }
           }
         }
-        std::string res = ev(pref[i], std::stoi(op_1), std::stoi(opera_2));
+        std::string res = ev(pref[i], std::stoi(op_1), std::stoi(op_2));
         stk.push(res);
       }
     } else {
