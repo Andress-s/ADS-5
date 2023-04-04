@@ -53,12 +53,13 @@ std::string infx2pstfx(std::string inf) {
 
 std::string ev(char op, int operand1, int operand2) {
     switch (op) {
-    case '+': return std::to_string(operand1 + operand2);
-    case '-': return std::to_string(operand1 - operand2);
-    case '*': return std::to_string(operand1 * operand2);
-    case '/': return std::to_string(operand1 / operand2);
+        case '+': return std::to_string(operand1 + operand2);
+        case '-': return std::to_string(operand1 - operand2);
+        case '*': return std::to_string(operand1 * operand2);
+        case '/': return std::to_string(operand1 / operand2);
     }
 }
+
 int eval(std::string pref) {
     std::stack<std::string> stk;
     std::string pust = " ";
@@ -96,15 +97,17 @@ int eval(std::string pref) {
                     if (op_1[0] == '0') std::reverse(op_1.begin(), op_1.end());
                 }
             }
-        std::string result = ev(pref[i], std::stoi(op_1), std::stoi(op_1));
-        stk.push(result);
+            std::string result = ev(pref[i], std::stoi(op_1), std::stoi(op_1));
+            stk.push(result);
         } else {
-            if (pref[i] == ' ') { stk.push(" ");
+            if (pref[i] == ' ') { 
+                stk.push(" ");
             } else {
                 stk.push(std::to_string(pref[i] - '0'));
             }
-        op_1 = " ";
-        op_2 = " ";
+            op_1 = " ";
+            op_2 = " ";
+        }
+        return std::stoi(stk.top());
     }
-    return std::stoi(stk.top());
 }
