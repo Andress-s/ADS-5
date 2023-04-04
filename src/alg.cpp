@@ -100,7 +100,7 @@ int eval(std::string pref) {
             std::string result = ev(pref[i], std::stoi(op_1), std::stoi(op_1));
             stk.push(result);
         } else {
-            if (pref[i] == ' ') { 
+            if (pref[i] == ' ') {
                 stk.push(" ");
             } else {
                 stk.push(std::to_string(pref[i] - '0'));
