@@ -71,7 +71,7 @@ int eval(std::string pref) {
       }
       if (stk.top() == "0") {
         while (!stk.empty() && stk.top() != pust) {
-          opera_2 += stk.top();
+          op_2 += stk.top();
           stk.pop();
         }
         if (op_2[0] == '0')
@@ -87,14 +87,14 @@ int eval(std::string pref) {
           stk.pop();
           if (stk.top() == "0") {
             while (!stk.empty() && stk.top() != pust) {
-              opera_1 += stk.top();
+              op_1 += stk.top();
               stk.pop();
             }
-            if (opera_1[0] == '0')
+            if (op_1[0] == '0')
               std::reverse(op_1.begin(), op_1.end());
           } else {
             while (!stk.empty() && stk.top() != pust) {
-              opera_1 += stk.top();
+              op_1 += stk.top();
               stk.pop();
               if (op_1[0] == '0')
                 std::reverse(op_1.begin(), op_1.end());
