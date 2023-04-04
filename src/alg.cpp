@@ -70,8 +70,8 @@ int eval(std::string pref) {
                     op_2 += stk.top();
                     stk.pop();
                 }
-            if (op_2[0] == '0') std::reverse(op_2.begin(), op_2.end());
-            } else { 
+                if (op_2[0] == '0') std::reverse(op_2.begin(), op_2.end());
+            } else {
                 while (!stk.empty() && stk.top() != pust) {
                     op_2 += stk.top();
                     stk.pop();
