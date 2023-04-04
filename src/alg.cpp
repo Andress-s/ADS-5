@@ -58,6 +58,7 @@ std::string ev(char op, int operand1, int operand2) {
         case '*': return std::to_string(operand1 * operand2);
         case '/': return std::to_string(operand1 / operand2);
     }
+    return 0;
 }
 
 int eval(std::string pref) {
@@ -110,4 +111,5 @@ int eval(std::string pref) {
         }
         return std::stoi(stk.top());
     }
+    return 0;
 }
