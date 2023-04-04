@@ -1,4 +1,7 @@
 // Copyright 2021 NNTU-CS
+#include <stack>
+#include <string>
+
 bool isOperator(char ch)
 {
     if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
@@ -37,11 +40,9 @@ std::string infx2pstfx(std::string inf)
                 stk.pop();
             }
             stk.pop();
-        }
-        else
+        } else
             postfix += inf[i];
     }
-
     while (!stk.empty())
     {
         postfix.push_back(' ');
@@ -50,8 +51,6 @@ std::string infx2pstfx(std::string inf)
     }
     return postfix;
 }
-
-
 
 std::string evaluate(char op, int operand1, int operand2) 
 {
@@ -62,9 +61,7 @@ std::string evaluate(char op, int operand1, int operand2)
     case '/': return std::to_string(operand1 / operand2);
     }
 }
-
-int eval(std::string pref)
-{
+int eval(std::string pref) {
     std::stack<std::string> stk;
     std::string pust = " ";
     std::string op_2;
@@ -77,7 +74,7 @@ int eval(std::string pref)
                     op_2 += stk.top();
                     stk.pop();
                 }
-                if (op_2[0] == '0') std::reverse(op_2.begin(), op_2.end());
+            if (op_2[0] == '0') std::reverse(op_2.begin(), op_2.end());
             } else {
                 while (!stk.empty() && stk.top() != pust){
                     op_2 += stk.top();
@@ -108,7 +105,7 @@ int eval(std::string pref)
             } else {
                 stk.push(std::to_string(pref[i] - '0'));
             }
-            op_1 = " ";
+        op_1 = " ";
         op_2 = " ";
     }
     return std::stoi(stk.top());
