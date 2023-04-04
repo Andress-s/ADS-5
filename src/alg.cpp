@@ -1,6 +1,8 @@
 // Copyright 2021 NNTU-CS
+#include <iomanip>
 #include <stack>
 #include <string>
+#include <algorithm>
 
 bool isOperator(char ch) {
     if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
